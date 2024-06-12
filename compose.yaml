@@ -1,0 +1,32 @@
+version: "3.9"
+name: "basic-mart"
+services:
+  api:
+    build:
+      context: ./mart
+      dockerfile: Dockerfile
+    container_name: basicMartCont
+    ports:
+      - "8000:8000"
+    volumes:
+      - "./mart:/code/"   # Volume bind mounting
+
+  postgres_db:
+    image: postgres:latest
+    restart: always
+    container_name: basicMartPostgresCont
+    environment:
+      - POSTGRES_USER=shoaib
+      - POSTGRES_PASSWORD=mypassword
+      - POSTGRES_DB=mydatabase
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_db:/var/lib/postgresql/data
+volumes:
+  postgres_db:
+    driver: local
+
+networks:
+  default:
+    driver: bridge
