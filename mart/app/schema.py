@@ -1,23 +1,15 @@
 from sqlmodel import SQLModel, Field
-from typing import Literal
 
 class Product(SQLModel, table=True):
     id: int | None = Field(None, primary_key=True)
     name: str
-    # category: Literal["Food", "Health", "Fashion", "Electronics", "Sports", "Vahicle", "Furniture", "Literature"]
+    category: str = Field(default='food | health | fashion | electronics | sports | vahicle | furniture | literature | other')
     price: int
     quantity : int
-
-class AddProduct(SQLModel):
-    name: str
-    # category: Literal["Food", "Health", "Fashion", "Electronics", "Sports", "Vahicle", "Furniture", "Literature"]
-    price: int
-    quantity : int
-
 
 class UpdateProduct(SQLModel):
     name: None| str = Field(None)
-    # category: None| Literal["Food", "Health", "Fashion", "Electronics", "Sports", "Vahicle", "Furniture", "Literature"]
+    category: None| str = Field(default='food | health | fashion | electronics | sports | vahicle | furniture | literature | other')
     price: None| int = Field(None)
     quantity : None| int = Field(None)
 
